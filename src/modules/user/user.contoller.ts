@@ -10,8 +10,8 @@ export class UserController {
     return this.userService.test();
   }
 
-  @Get("/getToolsList")
+  @Get("/getNavList")
   getToolsList() {
-    // return this.userService.getToolsList();
+    return this.userService.getNavList();
   }
 }

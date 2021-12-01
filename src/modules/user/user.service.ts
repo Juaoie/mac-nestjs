@@ -18,12 +18,25 @@ export class UserService {
   /**
    * 获取用户导航列表
    */
-  // getToolsList(){
-  //   const uri="https://uaoie.top/resources/images/mac-steam/"
-  //   return [
-  //     {
-  //       url :uri+""
-  //     }
-  //   ]
-  // }
+  getNavList() {
+    const uri = "https://uaoie.top/resources/images/mac-steam/";
+    return [
+      {
+        url: uri + "launchpad.png",
+        title: "launchpad",
+      },
+      {
+        url: uri + "safari.png",
+        title: "safari",
+      },
+      {
+        url: uri + "weixin.png",
+        title: "wechat",
+      },
+      {
+        url: uri + "github.png",
+        title: "github",
+      },
+    ];
+  }
 }
