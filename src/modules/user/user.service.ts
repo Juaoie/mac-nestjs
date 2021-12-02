@@ -22,18 +22,22 @@ export class UserService {
     const uri = "https://uaoie.top/resources/images/mac-steam/";
     return [
       {
+        id: 1,
         url: uri + "launchpad.png",
         title: "launchpad",
       },
       {
+        id: 2,
         url: uri + "safari.png",
         title: "safari",
       },
       {
+        id: 3,
         url: uri + "weixin.png",
         title: "wechat",
       },
       {
+        id: 4,
         url: uri + "github.png",
         title: "github",
       },
