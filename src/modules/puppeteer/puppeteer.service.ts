@@ -1,5 +1,5 @@
 import { Injectable, Logger } from "@nestjs/common";
-import puppeteer from "puppeteer-core";
+import puppeteer from "puppeteer";
 
 @Injectable()
 export class PuppeteerService {
@@ -33,7 +33,10 @@ export class PuppeteerService {
    */
   async getImg(path: string) {
     this.logger.log("开始打开浏览器");
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      executablePath: "/usr/bin/chromium-browser",
+      args: ["--no-sandbox"],
+    });
     try {
       this.logger.log("开始创建新页面");
       const page = await browser.newPage();
