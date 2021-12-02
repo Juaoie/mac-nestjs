@@ -6,6 +6,7 @@ import { User } from "./entity/user.entity";
 import { UserModule } from "./modules/user/user.module";
 import { APP_INTERCEPTOR } from "@nestjs/core";
 import { ResponseInterceptor } from "./shared/interceptor/response.interceptor";
+import { PuppeteerModule } from "./modules/puppeteer/puppeteer.module";
 
 @Module({
   controllers: [AppController],
@@ -29,6 +30,7 @@ import { ResponseInterceptor } from "./shared/interceptor/response.interceptor";
       entities: [User],
     }),
     UserModule,
+    PuppeteerModule,
   ],
 })
 export class AppModule {}
