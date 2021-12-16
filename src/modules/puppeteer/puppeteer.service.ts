@@ -12,6 +12,7 @@ export class PuppeteerService {
     const browser = await puppeteer.launch({
       executablePath: "/usr/bin/chromium-browser",
       args: ["--no-sandbox"],
+      headless: true,
     });
     try {
       this.logger.log("开始创建新页面");
@@ -34,8 +35,9 @@ export class PuppeteerService {
   async getImg(path: string) {
     this.logger.log("开始打开浏览器");
     const browser = await puppeteer.launch({
-      executablePath: "/usr/bin/chromium-browser",
+      // executablePath: "/usr/bin/chromium-browser",
       args: ["--no-sandbox"],
+      headless: false,
     });
     try {
       this.logger.log("开始创建新页面");
