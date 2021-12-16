@@ -25,4 +25,9 @@ export class UserController {
   setRunApp(@Body() runApp: RunApp) {
     return this.userService.setRunApp(runApp);
   }
+
+  @Post("/addRunApp")
+  addRunApp(@Body() runApp: RunApp) {
+    return this.userService.addRunApp(runApp);
+  }
 }

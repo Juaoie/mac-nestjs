@@ -1,3 +1,4 @@
+import { App } from "@/entity/app.entity";
 import { RunApp } from "@/entity/run_app.entity";
 import { User } from "@/entity/user.entity";
 import { Injectable, Logger } from "@nestjs/common";
@@ -14,6 +15,9 @@ export class UserService {
   @InjectRepository(RunApp)
   private readonly runAppRepository: Repository<RunApp>;
 
+  @InjectRepository(App)
+  private readonly appRepository: Repository<App>;
+
   async test(): Promise<User[]> {
     const userList = this.userRepository.find();
     return userList;
@@ -22,39 +26,23 @@ export class UserService {
   /**
    * 获取用户导航列表
    */
-  getNavList() {
+  async getNavList() {
     const uri = "https://uaoie.top/resources/images/mac-steam/";
-    return [
-      {
-        id: 1,
-        url: uri + "launchpad.png",
-        title: "launchpad",
-      },
-      {
-        id: 2,
-        url: uri + "safari.png",
-        title: "safari",
-      },
-      {
-        id: 3,
-        url: uri + "weixin.png",
-        title: "wechat",
-      },
-      {
-        id: 4,
-        url: uri + "github.png",
-        title: "github",
-      },
-    ];
+    const appList: App[] = await this.appRepository.find();
+    return appList.map(item => {
+      item.icon = uri + item.icon;
+      return item;
+    });
   }
 
   /**
    * 获取运行中的app
    */
-  getRunAppList() {
+  async getRunAppList() {
+    return await this.runAppRepository.find();
+
     return [
       {
-        name: "text",
         title: "新建文档1",
         id: 1,
         style: {
@@ -68,7 +56,6 @@ export class UserService {
         },
       },
       {
-        name: "text",
         title: "新建文档2",
         id: 2,
         style: {
@@ -85,9 +72,18 @@ export class UserService {
   }
 
   /**
+   *
+   * @param runApp 添加运行app
+   */
+  async addRunApp(runApp: RunApp) {
+    await this.runAppRepository.insert(runApp);
+    return "成功";
+  }
+  /**
    * 设置运行app 信息
    */
-  setRunApp(runApp: RunApp) {
-    this.runAppRepository.insert(runApp);
+  async setRunApp(runApp: RunApp) {
+    await this.runAppRepository.update(runApp.id, runApp);
+    return "成功";
   }
 }

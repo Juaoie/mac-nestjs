@@ -1,19 +1,16 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class RunApp {
+export class App {
   @PrimaryGeneratedColumn()
-  id: number; //
+  appId: number;
 
   @Column()
-  createTime: Date; //
-
-  @Column()
-  updateTime: Date;
+  name: string;
 
   @Column()
   title: string;
 
   @Column()
-  styleId: number;
+  icon: string;
 }
