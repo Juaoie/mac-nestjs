@@ -1,4 +1,4 @@
-import { RunApp } from "@/entity/run_app.entity";
+import { RunApp } from "@/entity/runApp.entity";
 import { Body, Controller, Get, Post } from "@nestjs/common";
 import { UserService } from "./user.service";
 

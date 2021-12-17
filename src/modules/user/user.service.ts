@@ -1,9 +1,10 @@
 import { App } from "@/entity/app.entity";
-import { RunApp } from "@/entity/run_app.entity";
+import { RunApp } from "@/entity/runApp.entity";
 import { User } from "@/entity/user.entity";
 import { Injectable, Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
+import { Style } from "@/entity/style.entity";
 
 @Injectable()
 export class UserService {
@@ -17,6 +18,9 @@ export class UserService {
 
   @InjectRepository(App)
   private readonly appRepository: Repository<App>;
+
+  @InjectRepository(Style)
+  private readonly styleRepository: Repository<Style>;
 
   async test(): Promise<User[]> {
     const userList = this.userRepository.find();
@@ -39,36 +43,12 @@ export class UserService {
    * 获取运行中的app
    */
   async getRunAppList() {
-    return await this.runAppRepository.find();
-
-    return [
-      {
-        title: "新建文档1",
-        id: 1,
-        style: {
-          x: 50,
-          y: 60,
-          w: 300,
-          h: 200,
-          zIndex: 10,
-          minW: 300,
-          minH: 200,
-        },
+    return await this.runAppRepository.find({
+      where: {
+        state: true,
       },
-      {
-        title: "新建文档2",
-        id: 2,
-        style: {
-          x: 190,
-          y: 400,
-          w: 500,
-          h: 400,
-          zIndex: 20,
-          minW: 300,
-          minH: 200,
-        },
-      },
-    ];
+      relations: ["style"],
+    });
   }
 
   /**
@@ -77,6 +57,7 @@ export class UserService {
    */
   async addRunApp(runApp: RunApp) {
     await this.runAppRepository.insert(runApp);
+    await this.styleRepository.insert(runApp.style);
     return "成功";
   }
   /**
@@ -84,6 +65,7 @@ export class UserService {
    */
   async setRunApp(runApp: RunApp) {
     await this.runAppRepository.update(runApp.id, runApp);
+    await this.styleRepository.update(runApp.style.id, runApp.style);
     return "成功";
   }
 }

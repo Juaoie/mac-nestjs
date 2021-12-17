@@ -7,8 +7,9 @@ import { UserModule } from "./modules/user/user.module";
 import { APP_INTERCEPTOR } from "@nestjs/core";
 import { ResponseInterceptor } from "./shared/interceptor/response.interceptor";
 import { PuppeteerModule } from "./modules/puppeteer/puppeteer.module";
-import { RunApp } from "./entity/run_app.entity";
+import { RunApp } from "./entity/runApp.entity";
 import { App } from "./entity/app.entity";
+import { Style } from "./entity/style.entity";
 
 @Module({
   controllers: [AppController],
@@ -29,7 +30,7 @@ import { App } from "./entity/app.entity";
       password: "hugaojie2021",
       database: "db_postcode_test",
       synchronize: true,
-      entities: [User, RunApp, App],
+      entities: [User, RunApp, App, Style],
     }),
     UserModule,
     PuppeteerModule,

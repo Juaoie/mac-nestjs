@@ -1,19 +1,22 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class RunApp {
+export class Style {
   @PrimaryGeneratedColumn()
-  id: number; //
+  id: string; //
 
   @Column()
-  createTime: Date; //
+  left: number;
 
   @Column()
-  updateTime: Date;
+  top: number;
 
   @Column()
-  title: string;
+  width: number;
 
   @Column()
-  styleId: number;
+  height: number;
+
+  @Column()
+  zIndex: number;
 }

@@ -9,8 +9,5 @@ export class App {
   name: string;
 
   @Column()
-  title: string;
-
-  @Column()
   icon: string;
 }
