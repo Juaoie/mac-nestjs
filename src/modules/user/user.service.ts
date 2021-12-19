@@ -56,9 +56,9 @@ export class UserService {
    * @param runApp 添加运行app
    */
   async addRunApp(runApp: RunApp) {
-    await this.runAppRepository.insert(runApp);
     await this.styleRepository.insert(runApp.style);
-    return "成功";
+    await this.runAppRepository.insert(runApp);
+    return "添加成功";
   }
   /**
    * 设置运行app 信息
@@ -66,6 +66,6 @@ export class UserService {
   async setRunApp(runApp: RunApp) {
     await this.runAppRepository.update(runApp.id, runApp);
     await this.styleRepository.update(runApp.style.id, runApp.style);
-    return "成功";
+    return "更新成功";
   }
 }
