@@ -68,4 +68,12 @@ export class UserService {
     await this.styleRepository.update(runApp.style.id, runApp.style);
     return "更新成功";
   }
+
+  /**
+   * 删除运行app信息
+   */
+  async deleteRunApp(runApp: { id: number }) {
+    await this.runAppRepository.update(runApp.id, { state: false });
+    return "删除成功";
+  }
 }

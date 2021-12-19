@@ -30,4 +30,9 @@ export class UserController {
   addRunApp(@Body() runApp: RunApp) {
     return this.userService.addRunApp(runApp);
   }
+
+  @Post("/deleteRunApp")
+  deleteRunApp(@Body() runApp: { id: number }) {
+    return this.userService.deleteRunApp(runApp);
+  }
 }
