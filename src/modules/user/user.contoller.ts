@@ -21,9 +21,9 @@ export class UserController {
     return this.userService.getRunAppList();
   }
 
-  @Post("/setRunApp")
-  setRunApp(@Body() runApp: RunApp) {
-    return this.userService.setRunApp(runApp);
+  @Post("/updateRunApp")
+  updateRunApp(@Body() runApp: RunApp) {
+    return this.userService.updateRunApp(runApp);
   }
 
   @Post("/addRunApp")

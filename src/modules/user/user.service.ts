@@ -63,7 +63,7 @@ export class UserService {
   /**
    * 设置运行app 信息
    */
-  async setRunApp(runApp: RunApp) {
+  async updateRunApp(runApp: RunApp) {
     await this.runAppRepository.update(runApp.id, runApp);
     await this.styleRepository.update(runApp.style.id, runApp.style);
     return "更新成功";
