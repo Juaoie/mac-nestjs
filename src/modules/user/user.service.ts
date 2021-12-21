@@ -27,6 +27,10 @@ export class UserService {
     return userList;
   }
 
+  async userLogin(user: User) {
+    const userEntity = await this.userRepository.findOne(user.userId);
+  }
+
   /**
    * 获取用户导航列表
    */

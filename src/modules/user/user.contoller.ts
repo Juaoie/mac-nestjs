@@ -1,5 +1,6 @@
 import { RunApp } from "@/entity/runApp.entity";
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { User } from "@/entity/user.entity";
+import { Body, Controller, Get, Post, Response } from "@nestjs/common";
 import { UserService } from "./user.service";
 
 @Controller("/user")
@@ -9,6 +10,12 @@ export class UserController {
   @Get("/test")
   getBingImage() {
     return this.userService.test();
+  }
+
+  @Post("/userLogin")
+  userLogin(@Body() user: User, @Response() res) {
+    this.userService.userLogin(user);
+    
   }
 
   @Get("/getNavList")

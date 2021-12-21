@@ -1,12 +1,13 @@
-import { Entity, Column, PrimaryColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
-  @PrimaryColumn()
-  userId: string; //相册id albumid
+  @PrimaryGeneratedColumn()
+  userId: string; //
 
-  @Column({
-    nullable: true,
-  })
-  userName: string; //相册创建时间 timeint
+  @Column()
+  userName: string; //
+
+  @Column()
+  password: string;
 }
