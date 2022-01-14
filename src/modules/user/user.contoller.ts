@@ -1,6 +1,6 @@
 import { RunApp } from "@/entity/runApp.entity";
 import { User } from "@/entity/user.entity";
-import { Body, Controller, Get, Post, Res } from "@nestjs/common";
+import { Body, Controller, Get, Post, Res, Headers } from "@nestjs/common";
 import { Response } from "express";
 import { UserService } from "./user.service";
 import { APP_KEY, TOKEN_TIME } from "@/config";
@@ -38,22 +38,29 @@ export class UserController {
   }
 
   @Get("/getRunAppList")
-  getRunAppList() {
-    return this.userService.getRunAppList();
+  getRunAppList(@Headers("cookie") cookies: string) {
+    const userId = new URLSearchParams(cookies).get("userId");
+    return this.userService.getRunAppList(Number(userId));
   }
 
   @Post("/updateRunApp")
-  updateRunApp(@Body() runApp: RunApp) {
+  updateRunApp(@Body() runApp: RunApp, @Headers("cookie") cookies: string) {
+    const userId = new URLSearchParams(cookies).get("userId");
+    runApp.userId = Number(userId);
     return this.userService.updateRunApp(runApp);
   }
 
   @Post("/addRunApp")
-  addRunApp(@Body() runApp: RunApp) {
+  addRunApp(@Body() runApp: RunApp, @Headers("cookie") cookies: string) {
+    const userId = new URLSearchParams(cookies).get("userId");
+    runApp.userId = Number(userId);
     return this.userService.addRunApp(runApp);
   }
 
   @Post("/deleteRunApp")
-  deleteRunApp(@Body() runApp: { id: number }) {
+  deleteRunApp(@Body() runApp: RunApp, @Headers("cookie") cookies: string) {
+    const userId = new URLSearchParams(cookies).get("userId");
+    runApp.userId = Number(userId);
     return this.userService.deleteRunApp(runApp);
   }
 }

@@ -47,10 +47,11 @@ export class UserService {
   /**
    * 获取运行中的app
    */
-  async getRunAppList() {
+  async getRunAppList(userId: number) {
     return await this.runAppRepository.find({
       where: {
         state: true,
+        userId,
       },
       relations: ["style"],
     });
@@ -69,7 +70,7 @@ export class UserService {
    * 设置运行app 信息
    */
   async updateRunApp(runApp: RunApp) {
-    await this.runAppRepository.update(runApp.id, runApp);
+    await this.runAppRepository.update({ userId: runApp.userId, id: runApp.id }, runApp);
     await this.styleRepository.update(runApp.style.id, runApp.style);
     return "更新成功";
   }
@@ -77,8 +78,8 @@ export class UserService {
   /**
    * 删除运行app信息
    */
-  async deleteRunApp(runApp: { id: number }) {
-    await this.runAppRepository.update(runApp.id, { state: false });
+  async deleteRunApp(runApp: RunApp) {
+    await this.runAppRepository.update({ userId: runApp.userId, id: runApp.id }, { state: false });
     return "删除成功";
   }
 }

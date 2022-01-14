@@ -7,6 +7,9 @@ export class RunApp {
   id: number; //
 
   @Column()
+  userId: number;
+
+  @Column()
   appId: number;
 
   @Column()
