@@ -1,7 +1,10 @@
 import { RunApp } from "@/entity/runApp.entity";
 import { User } from "@/entity/user.entity";
-import { Body, Controller, Get, Post, Response } from "@nestjs/common";
+import { Body, Controller, Get, Post, Res } from "@nestjs/common";
+import { Response } from "express";
 import { UserService } from "./user.service";
+import { APP_KEY, TOKEN_TIME } from "@/config";
+import { signFun } from "@/tools/sign";
 
 @Controller("/user")
 export class UserController {
@@ -13,9 +16,20 @@ export class UserController {
   }
 
   @Post("/userLogin")
-  userLogin(@Body() user: User, @Response() res) {
-    this.userService.userLogin(user);
-    
+  async userLogin(@Body() user: User, @Res() res: Response) {
+    const data = await this.userService.userLogin(user);
+    if (data) {
+      const str = signFun({ userId: data.userId }, APP_KEY);
+      res.cookie("token", str, { httpOnly: true, maxAge: TOKEN_TIME });
+      res.status(200).send(data);
+    } else {
+      res.status(400).send("账号或密码错误");
+    }
+  }
+
+  @Post("/quickLogin")
+  async quickLogin() {
+    return true;
   }
 
   @Get("/getNavList")

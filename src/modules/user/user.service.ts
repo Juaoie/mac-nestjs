@@ -28,7 +28,8 @@ export class UserService {
   }
 
   async userLogin(user: User) {
-    const userEntity = await this.userRepository.findOne(user.userId);
+    const userEntity = await this.userRepository.findOne(user.userId, { where: { password: user.password } });
+    return userEntity;
   }
 
   /**

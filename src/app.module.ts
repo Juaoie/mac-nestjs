@@ -6,7 +6,7 @@ import { User } from "./entity/user.entity";
 import { UserModule } from "./modules/user/user.module";
 import { APP_INTERCEPTOR } from "@nestjs/core";
 import { ResponseInterceptor } from "./shared/interceptor/response.interceptor";
-import { PuppeteerModule } from "./modules/puppeteer/puppeteer.module";
+// import { PuppeteerModule } from "./modules/puppeteer/puppeteer.module";
 import { RunApp } from "./entity/runApp.entity";
 import { App } from "./entity/app.entity";
 import { Style } from "./entity/style.entity";
@@ -33,7 +33,7 @@ import { Style } from "./entity/style.entity";
       entities: [User, RunApp, App, Style],
     }),
     UserModule,
-    PuppeteerModule,
+    // PuppeteerModule,
   ],
 })
 export class AppModule {}
