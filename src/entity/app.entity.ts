@@ -10,4 +10,13 @@ export class App {
 
   @Column()
   icon: string;
+
+  @Column()
+  width: number;
+
+  @Column()
+  height: number;
+
+  @Column()
+  single: boolean;
 }

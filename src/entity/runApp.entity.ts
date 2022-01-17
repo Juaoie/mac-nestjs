@@ -24,6 +24,9 @@ export class RunApp {
   @Column() //正在使用
   state: boolean;
 
+  @Column()
+  hidden: boolean;
+
   @OneToOne(() => Style)
   @JoinColumn()
   style: Style;

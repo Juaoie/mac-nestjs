@@ -62,6 +62,9 @@ export class UserService {
    * @param runApp 添加运行app
    */
   async addRunApp(runApp: RunApp) {
+    const app = await this.appRepository.findOne(runApp.appId);
+    runApp.style.width = app.width;
+    runApp.style.height = app.height;
     await this.styleRepository.insert(runApp.style);
     await this.runAppRepository.insert(runApp);
     return "添加成功";
