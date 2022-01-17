@@ -19,4 +19,7 @@ export class App {
 
   @Column()
   single: boolean;
+
+  @Column()
+  link: string;
 }
