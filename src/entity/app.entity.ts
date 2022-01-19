@@ -22,4 +22,7 @@ export class App {
 
   @Column()
   link: string;
+
+  @Column() //是否在当前桌面打开
+  desktop: boolean;
 }

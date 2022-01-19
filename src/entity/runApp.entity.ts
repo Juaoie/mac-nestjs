@@ -27,6 +27,9 @@ export class RunApp {
   @Column()
   hidden: boolean;
 
+  @Column()
+  fullScreen: boolean;
+
   @OneToOne(() => Style)
   @JoinColumn()
   style: Style;
